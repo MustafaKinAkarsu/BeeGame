@@ -6,32 +6,51 @@ using UnityEngine;
 
 public class GenerateMyPath : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject prefab, pipePrefab;
+    public GameObject planePrefab;
     public bool closedLoop = false;
     public Transform[] waypoints = new Transform[8];
 
     public GameObject parent;
     public static GenerateMyPath instance;
     public BezierPath bezierPath;
+
+    public int k = 0;
+    public int factor = 1;
     private void Awake()
     {
         instance = this;
-        for (int i = 0; i < 3; i++)
+        for (int i = 1; i < 4; i++)
         {
-            GameObject go = Instantiate(prefab, new Vector3(5 * i, 0, 3 * i), Quaternion.identity);
+            GameObject go = Instantiate(prefab, new Vector3(-0.28f, -0.28f, k), Quaternion.identity);
+            k += 5;
             go.transform.SetParent(parent.transform);
-            waypoints[i] = go.transform;
+            waypoints[i-1] = go.transform;
         }
-
-            
         
+    }
+    float z = 19.79f;
+    public Transform InstantiatePipe()
+    {
+        GameObject pipe = Instantiate(pipePrefab, new Vector3(pipePrefab.transform.position.x, pipePrefab.transform.position.y, pipePrefab.transform.position.z + z), Quaternion.identity);
+        
+        z += 19.79f;
+        return pipe.transform;
     }
     void Start()
     {
 
         bezierPath = new BezierPath(waypoints, closedLoop, PathSpace.xyz);
-        bezierPath.ControlPointMode = BezierPath.ControlMode.Free;
+        bezierPath.ControlPointMode = BezierPath.ControlMode.Automatic;
+        bezierPath.GlobalNormalsAngle = 90;
         GetComponent<PathCreator>().bezierPath = bezierPath;
+    }
+
+    public Transform SpawnPlane()
+    {
+        GameObject plane = Instantiate(planePrefab, new Vector3(planePrefab.transform.position.x, planePrefab.transform.position.y, planePrefab.transform.position.z + z), Quaternion.Euler(-90.00f,0,0));
+        plane.transform.SetParent(Player.instance.planeParent.transform);
+        return plane.transform;
     }
 
     private void Update()
