@@ -11,7 +11,7 @@ public class FlyController : MonoBehaviour
     float distanceTravelled;
 
     float xOffset, yOffset;
-    float maxDistance = 1;
+    float maxDistance = 0.5f;
 
     [SerializeField]
     float controllerSpeed = 5;
