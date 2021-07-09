@@ -7,14 +7,14 @@ public class FlyController : MonoBehaviour
 {
     public PathCreator pathCreator;
     public EndOfPathInstruction endOfPathInstruction;
-    public float speed = 5;
+    public float speed = 1;
     float distanceTravelled;
 
-    float xOffset, yOffset;
+    public float xOffset, yOffset;
     float maxDistance = 0.5f;
 
     [SerializeField]
-    float controllerSpeed = 5;
+    float controllerSpeed = 115;
 
     void Start()
     {
@@ -34,16 +34,25 @@ public class FlyController : MonoBehaviour
             distanceTravelled += speed * Time.deltaTime;
             Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
-            /*if (h == 0 && v == 0)
+
+            if (Input.GetKeyDown("a"))
             {
-                xOffset = Mathf.MoveTowards(xOffset, 0, Time.deltaTime * controllerSpeed);
-                yOffset = Mathf.MoveTowards(yOffset, 0, Time.deltaTime * controllerSpeed);
+                xOffset += h * controllerSpeed;
             }
-            else
-            {*/
-                xOffset += h * Time.deltaTime * controllerSpeed;
-                yOffset += v * Time.deltaTime * controllerSpeed;
-            //}
+            else if (Input.GetKeyDown("d"))
+            {
+                xOffset += h * controllerSpeed;
+            }
+            else if (Input.GetKeyDown("w"))
+            {
+                yOffset += v  * controllerSpeed;
+            }
+            else if (Input.GetKeyDown("s"))
+            {
+                yOffset  += v * controllerSpeed;
+            }
+
+
 
             transform.position = desiredPoint;
             xOffset = Mathf.Clamp(xOffset, -maxDistance, maxDistance);
@@ -54,6 +63,9 @@ public class FlyController : MonoBehaviour
             
         }
     }
+
+
+
 
     // If the path changes during the game, update the distance travelled so that the follower's position on the new path
     // is as close as possible to its position on the old path
