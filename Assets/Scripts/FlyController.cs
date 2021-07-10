@@ -27,15 +27,15 @@ public class FlyController : MonoBehaviour
 
     void Update()
     {
-        float v = Input.GetAxis("Vertical");
-        float h = Input.GetAxis("Horizontal");
+        //float v = Input.GetAxis("Vertical");
+        //float h = Input.GetAxis("Horizontal");
         if (pathCreator != null)
         {
             distanceTravelled += speed * Time.deltaTime;
             Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
-            if (Input.GetKeyDown("a"))
+            /*if (Input.GetKeyDown("a"))
             {
                 xOffset += h * controllerSpeed;
             }
@@ -50,9 +50,24 @@ public class FlyController : MonoBehaviour
             else if (Input.GetKeyDown("s"))
             {
                 yOffset  += v * controllerSpeed;
+            }*/
+
+            if (Input.GetKeyDown(KeyCode.UpArrow) && yOffset < 0.4f)
+            {
+                yOffset += 0.4f;
             }
-
-
+            if (Input.GetKeyDown(KeyCode.DownArrow) && yOffset > -0.4f)
+            {
+                yOffset -= 0.4f;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) && xOffset < 0.4f)
+            {
+                xOffset += 0.4f;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && xOffset > -0.4f)
+            {
+                xOffset -= 0.4f;
+            }
 
             transform.position = desiredPoint;
             xOffset = Mathf.Clamp(xOffset, -maxDistance, maxDistance);
