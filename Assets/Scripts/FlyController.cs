@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FlyController : MonoBehaviour
 {
+    public static FlyController instance;
     public PathCreator pathCreator;
     public EndOfPathInstruction endOfPathInstruction;
     public float speed = 1;
@@ -18,6 +19,7 @@ public class FlyController : MonoBehaviour
 
     void Start()
     {
+        instance = this;
         if (pathCreator != null)
         {
             // Subscribed to the pathUpdated event so that we're notified if the path changes during the game

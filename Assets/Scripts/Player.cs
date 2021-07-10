@@ -1,4 +1,5 @@
 ﻿using PathCreation;
+using PathCreation.Examples;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class Player : MonoBehaviour
     public int k;
     public int counter;
     public GameObject pipeParent,planeParent;
-
+    public GameObject CamFollowObj;
     void Start()
     {
         counter = 0;
@@ -44,6 +45,14 @@ public class Player : MonoBehaviour
             Transform transformTemp = GenerateMyPath.instance.InstantiatePipe();
             GenerateMyPath.instance.SpawnPlane();
             transformTemp.SetParent(pipeParent.transform);
+            ObstacleGenerator.instance.pipe = transformTemp.gameObject;
+            ObstacleGenerator.instance.Generator();
+        }
+        if (collision.gameObject.tag == "Stray_Voltage_Obs")
+        {
+            Debug.Log("ÇARPILDINNNNNNNNNNNNNNNNNNNN");
+            ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.StartTimer(3f);
+            StartCoroutine(ObstacleGenerator.instance._timerCR);
         }
     }
 

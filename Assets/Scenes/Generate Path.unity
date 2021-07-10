@@ -1385,6 +1385,7 @@ GameObject:
   - component: {fileID: 1020054533}
   - component: {fileID: 1020054532}
   - component: {fileID: 1020054531}
+  - component: {fileID: 1020054534}
   m_Layer: 0
   m_Name: Path
   m_TagString: Untagged
@@ -1497,6 +1498,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1020054534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020054530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6124085caf78c0441a0d16404e18184d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 5893092213382993044, guid: 51576989705bf3c41be22c35b4d33ed4,
+    type: 3}
+  pipe: {fileID: 32592210}
+  startSpeed: 0
 --- !u!1 &1023267183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3480,7 +3497,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.14, y: 1, z: 0.12}
+  m_Size: {x: 0.64, y: 0.63, z: 0.12}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3804522640730291332
 MonoBehaviour:
@@ -3500,6 +3517,7 @@ MonoBehaviour:
   counter: 0
   pipeParent: {fileID: 1166953883}
   planeParent: {fileID: 543763576}
+  CamFollowObj: {fileID: 1769460839}
 --- !u!114 &3804522640730291333
 MonoBehaviour:
   m_ObjectHideFlags: 0

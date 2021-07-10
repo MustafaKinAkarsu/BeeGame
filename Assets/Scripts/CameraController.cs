@@ -5,6 +5,7 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController instance;
     public Transform target;
     private Vector3 offset;
     public GameObject virtualCamera;
@@ -13,6 +14,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        instance = this;
         offset = transform.position - target.position;    
     }
 
