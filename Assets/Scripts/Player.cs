@@ -7,12 +7,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public static Player instance;
-    public bool collisionFlag = true;
+    public bool collisionFlag = false;
     public GameObject pathObject;
     public int k;
     public int counter;
     public GameObject pipeParent,planeParent;
     public GameObject CamFollowObj;
+
     void Start()
     {
         counter = 0;
