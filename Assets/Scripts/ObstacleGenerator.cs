@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class ObstacleGenerator : MonoBehaviour
 {
-    public GameObject obstaclePrefab, pipe;
+    public GameObject pipe, sprayobj;
+    public GameObject[] obstaclePrefab = new GameObject[4];
+
     public static ObstacleGenerator instance;
 
     public IEnumerator _timerCR;
@@ -16,12 +18,14 @@ public class ObstacleGenerator : MonoBehaviour
     {
         instance =  this ;
     }
-
+    
 
     public GameObject Generator()
     {
-        GameObject go = Instantiate(obstaclePrefab, pipe.transform, false);
+        GameObject go = Instantiate(obstaclePrefab[Random.Range(0,4)], pipe.transform, false);
+        //GameObject go = Instantiate(sprayobj, pipe.transform, false);
         return go;
+        
     }
 
     public IEnumerator StartTimer(float timeRemaining)
@@ -47,7 +51,23 @@ public class ObstacleGenerator : MonoBehaviour
         _timerCR = StopTimer(deltaSpeed);
         StartCoroutine(_timerCR);*/
     }
-
+    public IEnumerator SprayTimer(float timeRemaining)
+    {
+        ++accelerationCount;
+        if (accelerationCount == 1)
+        {
+            startSpeed = FlyController.instance.speed;
+            CameraController.instance.emptyFollower.GetComponent<PathFollower>().speed = startSpeed;
+        }
+        for (float i = timeRemaining; i > 0; i -= 0.1f)
+        {
+            FlyController.instance.speed -= 0.1f;
+            CameraController.instance.emptyFollower.GetComponent<PathFollower>().speed -= 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        FlyController.instance.speed = startSpeed;
+        CameraController.instance.emptyFollower.GetComponent<PathFollower>().speed = startSpeed;
+    }
     /*public IEnumerator StopTimer(float deltaSpeed, float timeRemaining = 1)
     {
         FlyController.instance.speed = Mathf.Round(FlyController.instance.speed);

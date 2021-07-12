@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Prefab
   - SpawnTrigger
+  - Stray_Voltage_Obs
+  - Spray_Obs
   layers:
   - Default
   - TransparentFX
