@@ -26,7 +26,6 @@ public class FlyController : MonoBehaviour
         instance = this;
         if (pathCreator != null)
         {
-            // Subscribed to the pathUpdated event so that we're notified if the path changes during the game
             pathCreator.pathUpdated += OnPathChanged;
         }
     }
@@ -39,50 +38,15 @@ public class FlyController : MonoBehaviour
 
     void Update()
     {
-        //float v = Input.GetAxis("Vertical");
-        //float h = Input.GetAxis("Horizontal");
         if (pathCreator != null)
         {
             distanceTravelled += speed * Time.deltaTime;
             Vector3 desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
-            /*if (Input.GetKeyDown("a"))
-            {
-                xOffset += h * controllerSpeed;
-            }
-            else if (Input.GetKeyDown("d"))
-            {
-                xOffset += h * controllerSpeed;
-            }
-            else if (Input.GetKeyDown("w"))
-            {
-                yOffset += v  * controllerSpeed;
-            }
-            else if (Input.GetKeyDown("s"))
-            {
-                yOffset  += v * controllerSpeed;
-            }*/
-            /*
-            if (Input.GetKeyDown(KeyCode.UpArrow) && yOffset < 0.4f)
-            {
-                yOffset += 0.4f;
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow) && yOffset > -0.4f)
-            {
-                yOffset -= 0.4f;
-            }
-            if (Input.GetKeyDown(KeyCode.RightArrow) && xOffset < 0.4f)
-            {
-                xOffset += 0.4f;
-            }
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && xOffset > -0.4f)
-            {
-                xOffset -= 0.4f;
-            }
-            */
-            SwipeMouse(); // Mouse ile swipe edilmesi
-            //SwipeTouch(); // Touch screen ile swipe edilmesi
+            SwipeMouse(); 
+            //SwipeTouch();
+            
 
             transform.position = desiredPoint;
             xOffset = Mathf.Clamp(xOffset, -maxDistance, maxDistance);
@@ -90,9 +54,8 @@ public class FlyController : MonoBehaviour
             desiredPoint = transform.TransformPoint(new Vector3(xOffset, yOffset, 0));
 
             transform.position = desiredPoint;
-            
-
         }
+
     }
 
     public void SwipeMouse()
@@ -117,13 +80,13 @@ public class FlyController : MonoBehaviour
             if (currentSwipe.y > 0  && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset < 0.4f)
         {
                 Debug.Log("up swipe");
-                yOffset += 0.4f;
+                StartCoroutine(Fly("Up"));
             }
             //swipe down
             if (currentSwipe.y < 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset > -0.4f)
         {
                 Debug.Log("down swipe");
-                yOffset -= 0.4f;
+                StartCoroutine(Fly("Down"));
             }
             //swipe left
             if (currentSwipe.x < 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset > -0.4f)
@@ -139,6 +102,41 @@ public class FlyController : MonoBehaviour
             }
         }
 
+    }
+
+    public float flytime = 0;
+    private IEnumerator Fly(string wheretoFly)
+    {
+        float tempY = transform.position.y;
+        switch (wheretoFly)
+        {
+            case "Up":
+                flytime = 0;
+                Debug.Log("tempY_up: " + tempY);
+                yOffset = 0.5f;
+                while (flytime < 2f)
+                {
+                    flytime += Time.deltaTime;
+                    transform.position = new Vector3(transform.position.x, Mathf.Lerp(0.75f, tempY + yOffset, flytime / 2f), transform.position.z);
+                    
+                    yield return null;
+                }
+                break;
+
+            case "Down":
+                flytime = 0f;
+                Debug.Log("tempY_down: " + tempY);
+                yOffset = 0.5f;
+                while (flytime < 2f)
+                {
+                    flytime += Time.deltaTime;
+                    transform.position = new Vector3(transform.position.x, Mathf.Lerp(0.75f, tempY - yOffset, flytime / 2f), transform.position.z);
+                    yield return null;
+                }
+                break;
+            default:
+                break;
+        }
     }
     public void SwipeTouch()
     {
