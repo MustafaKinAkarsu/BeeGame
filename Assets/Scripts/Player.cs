@@ -25,13 +25,16 @@ public class Player : MonoBehaviour
         counter = 0;
         instance = this;
         k = 20;
-        for(int i = 0; i < 7; i++)//başlangıcta oluşturulan i kadar pipe
+        /*
+        for(int i = 0; i < 8; i++)//başlangıcta oluşturulan i kadar pipe
         {
             Transform transformTemp = GenerateMyPath.instance.InstantiatePipe();//başlangıçtaki oluşturulan 2 . pipe
             transformTemp.SetParent(pipeParent.transform);
         }
-        GameObject goPlane = Instantiate(GenerateMyPath.instance.planePrefab, new Vector3(0.3f, 0.7f, 159f), Quaternion.Euler(-90.00f, 0, 0));
+        */
+        GameObject goPlane = Instantiate(GenerateMyPath.instance.planePrefab, new Vector3(0.3f, 0.7f, 140f), Quaternion.Euler(-90.00f, 0, 0));
         goPlane.transform.SetParent(planeParent.transform);
+        
     }
     public void OnTriggerEnter(Collider collision)
     {
@@ -49,6 +52,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "SpawnTrigger")//borudaki triger alanından geçtikten sonra boru oluşturma tetiklemesi
         {
+           
             Transform transformTemp = GenerateMyPath.instance.InstantiatePipe();
             GenerateMyPath.instance.SpawnPlane();
             transformTemp.SetParent(pipeParent.transform);
@@ -60,7 +64,7 @@ public class Player : MonoBehaviour
             //Debug.Log("ÇARPILDINNNNNNNNNNNNNNNNNNNN");
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.StartTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
-            Health -= 14;
+            Health -= 4;
         }
         if (collision.gameObject.tag == "Spray_Obs")
         {

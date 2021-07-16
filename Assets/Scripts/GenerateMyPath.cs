@@ -29,12 +29,14 @@ public class GenerateMyPath : MonoBehaviour
         }
         
     }
-    float z = 24.45f;
+    float z = 17.531f;
     public Transform InstantiatePipe()
     {
-        GameObject pipe = Instantiate(pipePrefab, new Vector3(pipePrefab.transform.position.x, pipePrefab.transform.position.y, pipePrefab.transform.position.z + z), Quaternion.identity);
+        // Instantiate methodunun son girdisi Quaternion.identity'den pipePrefab.transform.rotation olarak düzeltildi. 
+        GameObject pipe = Instantiate(pipePrefab, new Vector3(pipePrefab.transform.position.x, pipePrefab.transform.position.y, pipePrefab.transform.position.z + z), pipePrefab.transform.rotation);
+
         
-        z += 24.45f;
+        z += 17.531f;
         return pipe.transform;
     }
     void Start()
