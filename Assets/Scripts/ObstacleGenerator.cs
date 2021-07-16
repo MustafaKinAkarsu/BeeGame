@@ -22,7 +22,7 @@ public class ObstacleGenerator : MonoBehaviour
 
     public GameObject Generator()
     {
-        GameObject go = Instantiate(obstaclePrefab[Random.Range(0,4)], pipe.transform, false);
+        GameObject go = Instantiate(obstaclePrefab[Random.Range(0,6)], pipe.transform, false);
         //GameObject go = Instantiate(sprayobj, pipe.transform, false);
         return go;
         
