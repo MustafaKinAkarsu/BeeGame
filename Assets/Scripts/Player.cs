@@ -52,12 +52,14 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "SpawnTrigger")//borudaki triger alanından geçtikten sonra boru oluşturma tetiklemesi
         {
-           
+
             Transform transformTemp = GenerateMyPath.instance.InstantiatePipe();
             GenerateMyPath.instance.SpawnPlane();
             transformTemp.SetParent(pipeParent.transform);
             ObstacleGenerator.instance.pipe = transformTemp.gameObject;
             ObstacleGenerator.instance.Generator();
+            DeletePipe();
+            DeletePlane();
         }
         if (collision.gameObject.tag == "Stray_Voltage_Obs")
         {
@@ -84,15 +86,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    /*
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "SpawnTrigger")
         {
-            DeletePipe();
-            DeletePlane();
+
         }
     }
-
+    */
     void DeletePipe()
     {
         Destroy(pipeParent.transform.GetChild(0).gameObject);
