@@ -27,7 +27,7 @@ public class FlyController : MonoBehaviour
 
     void Start()
     {
-
+        Time.timeScale = 1;
         instance = this;
         if (pathCreator != null)
         {
@@ -39,6 +39,7 @@ public class FlyController : MonoBehaviour
 
     void Update()
     {
+        
         if (pathCreator != null)
         {
             distanceTravelled += speed * Time.deltaTime;
@@ -53,9 +54,9 @@ public class FlyController : MonoBehaviour
             desiredPoint = transform.TransformPoint(new Vector3(xOffset, yOffset, 0)); //Arıyı merkezden xOffset ve Yoffset uzaklığına taşır.                    
             transform.position = desiredPoint;
             SwipeMouse();
-
+            
         }
-
+       
     }
 
     
@@ -227,7 +228,6 @@ public class FlyController : MonoBehaviour
     {
         distanceTravelled = pathCreator.path.GetClosestDistanceAlongPath(transform.position);
     }
-
 
 
 }
