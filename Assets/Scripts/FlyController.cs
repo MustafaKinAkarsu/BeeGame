@@ -23,6 +23,7 @@ public class FlyController : MonoBehaviour
     Vector2 currentSwipe;
     Vector3 desiredPoint;
 
+    public bool swipeFlag = false;
 
     void Start()
     {
@@ -32,6 +33,7 @@ public class FlyController : MonoBehaviour
         {
             pathCreator.pathUpdated += OnPathChanged;
         }
+        swipeFlag = true;
     }
 
 
@@ -64,6 +66,7 @@ public class FlyController : MonoBehaviour
         switch (wheretoFly)
         {
             case "Up":
+                swipeFlag = false;
                 flytime = 0;
                 Debug.Log("tempY_up: " + tempY);
                 yOffset += 0.5f;
@@ -73,9 +76,11 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, Mathf.Lerp(tempY, tempY + 0.5f, flytime / 0.39f), transform.position.z);                  
                     yield return null;
                 }
+                swipeFlag = true;
                 break;
 
             case "Down":
+                swipeFlag = false;
                 flytime = 0f;
                 yOffset -= 0.5f;
                 while (flytime < 0.39f)
@@ -84,9 +89,11 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, Mathf.Lerp(tempY, tempY - 0.5f, flytime / 0.39f), transform.position.z);
                     yield return null;
                 }
+                swipeFlag = true;
                 break;
 
             case "Left":
+                swipeFlag = false;
                 flytime = 0;
                 Debug.Log("tempY_up: " + tempY);
                 xOffset -= 0.5f;
@@ -96,9 +103,11 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(Mathf.Lerp(tempx, tempx - 0.5f, flytime / 0.39f),transform.position.y , transform.position.z);                    
                     yield return null;
                 }
+                swipeFlag = true;
                 break;
 
             case "Right":
+                swipeFlag = false;
                 flytime = 0f;
                 xOffset += 0.5f;
                 while (flytime < 0.39f)
@@ -107,6 +116,7 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(Mathf.Lerp(tempx, tempx + 0.5f, flytime / 0.39f), transform.position.y, transform.position.z);
                     yield return null;
                 }
+                swipeFlag = true;
                 break;
             default:
                 break;
@@ -183,25 +193,25 @@ public class FlyController : MonoBehaviour
             currentSwipe.Normalize();
 
             //swipe upwards
-            if (currentSwipe.y > 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset < 0.4f)
+            if (currentSwipe.y > 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset < 0.4f && swipeFlag == true)
             {
                 Debug.Log("up swipe");
                 StartCoroutine(Fly("Up"));
             }
             //swipe down
-            if (currentSwipe.y < 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset > -0.4f)
+            if (currentSwipe.y < 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset > -0.4f && swipeFlag == true)
             {
                 Debug.Log("down swipe");
                 StartCoroutine(Fly("Down"));
             }
             //swipe left
-            if (currentSwipe.x < 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset > -0.4f)
+            if (currentSwipe.x < 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset > -0.4f && swipeFlag == true)
             {
                 Debug.Log("left swipe");
                 StartCoroutine(Fly("Left"));
             }
             //swipe right
-            if (currentSwipe.x > 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset < 0.4f)
+            if (currentSwipe.x > 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset < 0.4f && swipeFlag == true)
             {
                 Debug.Log("right swipe");
                 StartCoroutine(Fly("Right"));

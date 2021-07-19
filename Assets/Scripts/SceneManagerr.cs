@@ -9,4 +9,9 @@ public class SceneManagerr : MonoBehaviour
     {
          SceneManager.LoadScene("Generate Path");
     }
+
+    public void GotoMainScene()
+    {
+        SceneManager.LoadScene("Main Scene");
+    }
 }
