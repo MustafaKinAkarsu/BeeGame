@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FlyController : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class FlyController : MonoBehaviour
     public float speed = 1;
     public float distanceTravelled;
     public float xOffset, yOffset;
+
+
     float maxDistance = 0.5f;
 
     Vector2 firstPressPos;
@@ -20,8 +23,6 @@ public class FlyController : MonoBehaviour
     Vector2 currentSwipe;
     Vector3 desiredPoint;
 
-    [SerializeField]
-    float controllerSpeed = 115;
 
     void Start()
     {
@@ -43,10 +44,6 @@ public class FlyController : MonoBehaviour
             desiredPoint = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
             transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
 
-           
-           // SwipeTouch();
-            
-
             transform.position = desiredPoint;
             xOffset = Mathf.Clamp(xOffset, -maxDistance, maxDistance);
             yOffset = Mathf.Clamp(yOffset, -maxDistance, maxDistance);
@@ -54,11 +51,12 @@ public class FlyController : MonoBehaviour
             desiredPoint = transform.TransformPoint(new Vector3(xOffset, yOffset, 0)); //Arıyı merkezden xOffset ve Yoffset uzaklığına taşır.                    
             transform.position = desiredPoint;
             SwipeMouse();
+
         }
 
     }
 
-
+    
     private IEnumerator Fly(string wheretoFly)
     {
         float tempY = transform.position.y;

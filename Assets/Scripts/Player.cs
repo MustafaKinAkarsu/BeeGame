@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     public GameObject CamFollowObj;
     public int Health;
     public Text Distancetxt;
-    public GameObject GameoverCanv;
+    public GameObject GameoverCanv, backgroaund;
 
 
     void Start()
@@ -81,8 +81,10 @@ public class Player : MonoBehaviour
             Time.timeScale = 0;
             DistanceDisplay();
             GameoverCanv.SetActive(true);
+            backgroaund.SetActive(true);
 
-            
+
+
         }
     }
 
@@ -107,5 +109,7 @@ public class Player : MonoBehaviour
     {
         Distancetxt.text = "DISTANCE TRAVELLED :" + FlyController.instance.distanceTravelled.ToString() + "m";
     }
-  
+
+    public void RestartButton() => Application.LoadLevelAsync(Application.loadedLevel);
+
 }
