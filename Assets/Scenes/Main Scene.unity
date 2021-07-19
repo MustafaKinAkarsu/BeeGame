@@ -965,10 +965,10 @@ RectTransform:
   m_Father: {fileID: 1896548913}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 160}
+  m_AnchorMin: {x: 0.39200002, y: 0.44150376}
+  m_AnchorMax: {x: 0.6066667, y: 0.559249}
+  m_AnchoredPosition: {x: 0.5, y: -0.5}
+  m_SizeDelta: {x: -1, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &742513198
 MonoBehaviour:
@@ -2000,7 +2000,7 @@ GameObject:
   - component: {fileID: 1675145644}
   - component: {fileID: 1675145645}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2266,7 +2266,7 @@ GameObject:
   - component: {fileID: 1798089562}
   - component: {fileID: 1798089561}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: ---Main canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
