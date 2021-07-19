@@ -55,8 +55,5 @@ public class GenerateMyPath : MonoBehaviour
         return plane.transform;
     }
 
-    private void Update()
-    {
-        
-    }
+   
 }

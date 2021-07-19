@@ -25,13 +25,6 @@ public class Player : MonoBehaviour
         counter = 0;
         instance = this;
         k = 20;
-        /*
-        for(int i = 0; i < 8; i++)//başlangıcta oluşturulan i kadar pipe
-        {
-            Transform transformTemp = GenerateMyPath.instance.InstantiatePipe();//başlangıçtaki oluşturulan 2 . pipe
-            transformTemp.SetParent(pipeParent.transform);
-        }
-        */
         GameObject goPlane = Instantiate(GenerateMyPath.instance.planePrefab, new Vector3(0.3f, 0.7f, 140f), Quaternion.Euler(-90.00f, 0, 0));
         goPlane.transform.SetParent(planeParent.transform);
         
@@ -88,15 +81,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "SpawnTrigger")
-        {
-
-        }
-    }
-    */
+  
     void DeletePipe()
     {
         Destroy(pipeParent.transform.GetChild(0).gameObject);
@@ -110,6 +95,6 @@ public class Player : MonoBehaviour
         Distancetxt.text = "DISTANCE TRAVELLED :" + FlyController.instance.distanceTravelled.ToString() + "m";
     }
 
-    public void RestartButton() => Application.LoadLevelAsync(Application.loadedLevel);
+    public void RestartButton() => SceneManager.LoadScene("Generate Path");
 
 }
