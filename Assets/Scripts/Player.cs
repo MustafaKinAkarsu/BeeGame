@@ -15,13 +15,14 @@ public class Player : MonoBehaviour
     public int counter;
     public GameObject pipeParent,planeParent;
     public GameObject CamFollowObj;
-    public int Health;
+    public int Health, healthIconNumber;
     public Text Distancetxt;
     public GameObject GameoverCanv, backgroaund;
 
 
     void Start()
     {
+        healthIconNumber = 3;
         counter = 0;
         instance = this;
         k = 20;
@@ -60,6 +61,9 @@ public class Player : MonoBehaviour
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.StartTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
             Health -= 14;
+            UIManager.instance.HealthBarController();//elektrik x2 can götürdüğü için iki tane
+            UIManager.instance.HealthBarController();
+
         }
         if (collision.gameObject.tag == "Spray_Obs")
         {
@@ -67,6 +71,7 @@ public class Player : MonoBehaviour
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.SprayTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
             Health -= 7;
+            UIManager.instance.HealthBarController();
         }
         if (Health <= 0)
         {
