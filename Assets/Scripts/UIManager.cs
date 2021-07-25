@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     }
     public void GotoGeneratePath()
     {
-         SceneManager.LoadScene("Generate Path");
+         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GotoMainScene()
@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour
 
     public void HealthBarController( )
     {
-        Player.instance.healthIconNumber--;
+        //Player.instance.healthIconNumber--;
         Debug.Log("healtbar methodr");
-        healthBarList[Player.instance.healthIconNumber].GetComponent<Image>().gameObject.SetActive(false);
+        //healthBarList[Player.instance.healthIconNumber].GetComponent<Image>().gameObject.SetActive(false);
         
     }
 

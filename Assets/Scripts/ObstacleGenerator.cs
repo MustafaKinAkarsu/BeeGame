@@ -14,18 +14,30 @@ public class ObstacleGenerator : MonoBehaviour
 
     public float startSpeed;
     public int accelerationCount = 0;
+    int[] pipeObsIndex = { 1, 1, 2, 2, 3, 3, 12, 12, 11, 11, 10 }; // Toplam pipe sayýsý 11 olduðu için 11 elemanlý array  
     void Start()
     {
-        instance =  this ;
-    }
-    
+        instance = this;
 
-    public GameObject Generator()
+    }
+
+
+    public void Generator(GameObject parent, int index)
     {
-        GameObject go = Instantiate(obstaclePrefab[Random.Range(0,obstaclePrefab.Length)], pipe.transform, false);
+        int obsIndex = Random.Range(1, 12);
+        pipeObsIndex[index] = obsIndex;
+        parent.transform.GetChild(obsIndex).gameObject.SetActive(true);
+
+        //GameObject go = Instantiate(obstaclePrefab[Random.Range(0,obstaclePrefab.Length)], pipe.transform, false);
         //GameObject go = Instantiate(sprayobj, pipe.transform, false);
-        return go;
-        
+        //return go;
+
+    }
+
+    public void ObsDeactivator(GameObject parent)
+    {
+        for (int i = 1; i < 13; i++)
+            parent.transform.GetChild(i).gameObject.SetActive(false);
     }
 
     public IEnumerator StartTimer(float timeRemaining)
@@ -37,7 +49,7 @@ public class ObstacleGenerator : MonoBehaviour
             CameraController.instance.emptyFollower.GetComponent<PathFollower>().speed = startSpeed;
         }
 
-        for (float i = timeRemaining; i  > 0; i-= 0.1f)
+        for (float i = timeRemaining; i > 0; i -= 0.1f)
         {
             FlyController.instance.speed += 0.1f;
             CameraController.instance.emptyFollower.GetComponent<PathFollower>().speed += 0.1f;
