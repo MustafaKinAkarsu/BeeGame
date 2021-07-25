@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2515285782655523561}
   - component: {fileID: 363912365681749539}
   m_Layer: 0
-  m_Name: mod_pipe_straight
+  m_Name: Mod_pipe_straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: b433734dc6ebbb54ea4fc4f4a8f13138, type: 3}
+  - {fileID: 2100000, guid: 4e9fa0537fde6c34381ab1d31b25c9c2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

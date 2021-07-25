@@ -89,14 +89,14 @@ public class Player : MonoBehaviour
             //Debug.Log("ÇARPILDINNNNNNNNNNNNNNNNNNNN");
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.StartTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
-            Health -= 14;
+            //Health -= 14;
         }
         if (collision.gameObject.tag == "Spray_Obs")
         {
             Debug.Log("SPRAYLENDİN");
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.SprayTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
-            Health -= 7;
+           // Health -= 7;
         }
         if (Health <= 0)
         {

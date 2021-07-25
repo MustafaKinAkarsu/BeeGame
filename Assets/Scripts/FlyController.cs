@@ -25,8 +25,14 @@ public class FlyController : MonoBehaviour
 
     public bool swipeFlag = false;
 
+    public Animator bee;
+
     void Start()
     {
+        bee.SetBool("isUp", false);
+        bee.SetBool("isDown", false);
+        bee.SetBool("isLeft", false);
+        bee.SetBool("isRight", false);
         Time.timeScale = 1;
         instance = this;
         if (pathCreator != null)
@@ -77,6 +83,7 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, Mathf.Lerp(tempY, tempY + 0.5f, flytime / 0.39f), transform.position.z);                  
                     yield return null;
                 }
+                bee.SetBool("isUp", false);
                 swipeFlag = true;
                 break;
 
@@ -90,6 +97,7 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, Mathf.Lerp(tempY, tempY - 0.5f, flytime / 0.39f), transform.position.z);
                     yield return null;
                 }
+                bee.SetBool("isDown", false);
                 swipeFlag = true;
                 break;
 
@@ -104,6 +112,7 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(Mathf.Lerp(tempx, tempx - 0.5f, flytime / 0.39f),transform.position.y , transform.position.z);                    
                     yield return null;
                 }
+                bee.SetBool("isLeft", false);
                 swipeFlag = true;
                 break;
 
@@ -117,6 +126,7 @@ public class FlyController : MonoBehaviour
                     transform.position = new Vector3(Mathf.Lerp(tempx, tempx + 0.5f, flytime / 0.39f), transform.position.y, transform.position.z);
                     yield return null;
                 }
+                bee.SetBool("isRight", false);
                 swipeFlag = true;
                 break;
             default:
@@ -148,24 +158,28 @@ public class FlyController : MonoBehaviour
                 if (currentSwipe.y > 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset < 0.4f)
              {
                     Debug.Log("up swipe");
+                    bee.SetBool("isUp", true);
                     StartCoroutine(Fly("Up"));
                 }
                 //swipe down
                 if (currentSwipe.y < 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset > -0.4f)
              {
                     Debug.Log("down swipe");
+                    bee.SetBool("isDown", true);
                     StartCoroutine(Fly("Down"));
                 }
                 //swipe left
                 if (currentSwipe.x < 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset > -0.4f)
              {
                     Debug.Log("left swipe");
+                    bee.SetBool("isLeft", true);
                     StartCoroutine(Fly("Left"));
                 }
                 //swipe right
                 if (currentSwipe.x > 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset < 0.4f)
              {
                     Debug.Log("right swipe");
+                    bee.SetBool("isRight", true);
                     StartCoroutine(Fly("Right"));
                 }
             }
@@ -197,24 +211,28 @@ public class FlyController : MonoBehaviour
             if (currentSwipe.y > 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset < 0.4f && swipeFlag == true)
             {
                 Debug.Log("up swipe");
+                bee.SetBool("isUp", true);
                 StartCoroutine(Fly("Up"));
             }
             //swipe down
             if (currentSwipe.y < 0 && currentSwipe.x > -0.4f && currentSwipe.x < 0.4f && yOffset > -0.4f && swipeFlag == true)
             {
                 Debug.Log("down swipe");
+                bee.SetBool("isDown", true);
                 StartCoroutine(Fly("Down"));
             }
             //swipe left
             if (currentSwipe.x < 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset > -0.4f && swipeFlag == true)
             {
                 Debug.Log("left swipe");
+                bee.SetBool("isLeft", true);
                 StartCoroutine(Fly("Left"));
             }
             //swipe right
             if (currentSwipe.x > 0 && currentSwipe.y > -0.4f && currentSwipe.y < 0.4f && xOffset < 0.4f && swipeFlag == true)
             {
                 Debug.Log("right swipe");
+                bee.SetBool("isRight", true);
                 StartCoroutine(Fly("Right"));
             }
         }
