@@ -1270,7 +1270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1020054531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,7 +1341,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 90
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 0
@@ -2686,7 +2686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1798089561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5178,10 +5178,8 @@ MonoBehaviour:
   planeParent: {fileID: 543763576}
   CamFollowObj: {fileID: 1769460839}
   Health: 28
-  healthIconNumber: 0
   Distancetxt: {fileID: 0}
   GameoverCanv: {fileID: 1896548912}
-  backgroaund: {fileID: 0}
 --- !u!114 &3804522640730291333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5202,6 +5200,7 @@ MonoBehaviour:
   xOffset: 0
   yOffset: 0
   swipeFlag: 0
+  bee: {fileID: 0}
 --- !u!114 &3845809993654112829
 MonoBehaviour:
   m_ObjectHideFlags: 0

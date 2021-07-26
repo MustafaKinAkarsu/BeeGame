@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -19,11 +20,16 @@ public class Player : MonoBehaviour
     public Text Distancetxt;
     public GameObject GameoverCanv;
     //public GameObject follower;
+    public int healthIconNumber;
     private int i;
+
+    public TextMeshProUGUI pollenCount;
+    int collectedPollen = 0;
 
     void Start()
     {
-
+        healthIconNumber = 4;
+        pollenCount.text = "Pollen:0";
         i = 0;
         counter = 0;
         instance = this;
@@ -37,6 +43,10 @@ public class Player : MonoBehaviour
         */
         //GameObject goPlane = Instantiate(GenerateMyPath.instance.planePrefab, new Vector3(0.3f, 0.7f, 140f), Quaternion.Euler(-90.00f, 0, 0));
         //goPlane.transform.SetParent(planeParent.transform);
+        for (int i = 4; i < 11; ++i)
+        {
+            GenerateMyPath.instance.PollenGenerator(i);
+        }
 
     }
 
@@ -51,7 +61,14 @@ public class Player : MonoBehaviour
         for (int i = 0; i < 11; i++)
         {
             if (pipeParent.transform.GetChild(i).position.z < this.transform.position.z - 17.531f)
+            {
                 ObstacleGenerator.instance.ObsDeactivator(pipeParent.transform.GetChild(i).gameObject);
+            }
+            if (pipeParent.transform.GetChild(i).childCount == 15 && pipeParent.transform.GetChild(i).position.z < this.transform.position.z - 35.062f)
+            {
+                Debug.Log("POLEN DESTROY EDİLDİ");
+                Destroy(pipeParent.transform.GetChild(i).GetChild(14).gameObject);
+            }
         }
     }
 
@@ -82,47 +99,49 @@ public class Player : MonoBehaviour
             TransportPlane();
             Debug.Log("Index SPAWN: " + i);
             i++;
-
         }
         if (collision.gameObject.tag == "Stray_Voltage_Obs")
         {
             //Debug.Log("ÇARPILDINNNNNNNNNNNNNNNNNNNN");
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.StartTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
-            //Health -= 14;
+            UIManager.instance.HealthBarController();
+            UIManager.instance.HealthBarController();
+            Health -= 14;
         }
         if (collision.gameObject.tag == "Spray_Obs")
         {
             Debug.Log("SPRAYLENDİN");
             ObstacleGenerator.instance._timerCR = ObstacleGenerator.instance.SprayTimer(3f);
             StartCoroutine(ObstacleGenerator.instance._timerCR);
-           // Health -= 7;
+            UIManager.instance.HealthBarController();
+            Health -= 7;
         }
+
+        if (collision.gameObject.tag == "Pollen")
+        {
+            Debug.Log("Poleni aldın!!");
+            ++collectedPollen;
+            pollenCount.text = "Pollen:" + collectedPollen.ToString();
+            Destroy(collision.gameObject);
+        }
+
         if (Health <= 0)
         {
             Debug.Log("YOU JUST DIED");
             Time.timeScale = 0;
             DistanceDisplay();
             GameoverCanv.SetActive(true);
-
-
         }
-    }
 
-    /*
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "SpawnTrigger")
-        {
-
-        }
     }
-    */
+    
     void TransportPipe(int index)
     {
         Debug.Log("Index TRANSPORT PIPE: " + index);
         ObstacleGenerator.instance.Generator(pipeParent.transform.GetChild(index).gameObject, index);
         pipeParent.transform.GetChild(index).transform.position = new Vector3(pipeParent.transform.GetChild(index).transform.position.x, pipeParent.transform.GetChild(index).transform.position.y, pipeParent.transform.GetChild(index).transform.position.z + 192.84148f);
+        GenerateMyPath.instance.PollenGenerator(index);
         /*
         if(index != 0)
         {

@@ -24,8 +24,6 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("Main Scene");
     }
 
-
-
     public void Pause()
     {
         Time.timeScale = 0;
@@ -36,12 +34,16 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void HealthBarController( )
+    public void HealthBarController()
     {
-        //Player.instance.healthIconNumber--;
-        Debug.Log("healtbar methodr");
-        //healthBarList[Player.instance.healthIconNumber].GetComponent<Image>().gameObject.SetActive(false);
-        
+
+        if (Player.instance.healthIconNumber != 0)
+        {
+            Player.instance.healthIconNumber--;
+            Debug.Log("healtbar methodr");
+            healthBarList[Player.instance.healthIconNumber].GetComponent<Image>().gameObject.SetActive(false);
+
+        }
     }
 
 

@@ -15,6 +15,8 @@ public class GenerateMyPath : MonoBehaviour
     public static GenerateMyPath instance;
     public BezierPath bezierPath;
 
+    public GameObject[] pollenPrefab = new GameObject[9];
+
     public int k = 0;
     public int factor = 1;
     private void Awake()
@@ -55,5 +57,10 @@ public class GenerateMyPath : MonoBehaviour
         return plane.transform;
     }
 
-   
+    public Transform PollenGenerator(int parentIndex)
+    {
+        int randomIndex = Random.Range(0, 8);
+        GameObject pollen = Instantiate(pollenPrefab[randomIndex], Player.instance.pipeParent.transform.GetChild(parentIndex), false);
+        return pollen.transform;
+    }
 }

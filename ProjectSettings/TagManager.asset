@@ -8,6 +8,7 @@ TagManager:
   - SpawnTrigger
   - Stray_Voltage_Obs
   - Spray_Obs
+  - Pollen
   layers:
   - Default
   - TransparentFX
