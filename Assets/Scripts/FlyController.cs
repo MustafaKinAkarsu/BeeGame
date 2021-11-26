@@ -59,8 +59,8 @@ public class FlyController : MonoBehaviour
 
             desiredPoint = transform.TransformPoint(new Vector3(xOffset, yOffset, 0)); //Arıyı merkezden xOffset ve Yoffset uzaklığına taşır.                    
             transform.position = desiredPoint;
-            //SwipeMouse();
-            SwipeTouch();
+            SwipeMouse();
+            //SwipeTouch();
         }
        
     }
